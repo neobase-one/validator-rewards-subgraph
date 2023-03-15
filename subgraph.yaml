@@ -1,0 +1,20 @@
+specVersion: 0.0.5
+description: Canto Validator Rewards
+repository: https://github.com/neobase-one/validator-rewards-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: cosmos
+    name: Canto
+    network: canto
+    source:
+      startBlock: 0
+    mapping:
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Reward
+      eventHandlers:
+        - event: rewards
+          handler: handleReward
+      file: ./src/mappings/rewards.ts

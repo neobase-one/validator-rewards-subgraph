@@ -1,0 +1,36 @@
+{
+  "name": "validator-rewards-subgraph",
+  "version": "0.0.1",
+  "description": "Canto Validator Rewards",
+  "main": "index.js",
+  "repository": "https://github.com/neobase-one/validator-rewards-subgraph.git",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "graph codegen --output-dir src/types/",
+    "build": "graph build",
+    "create-local": "graph create canto/validator-rewards --node http://localhost:8020",
+    "remove-local": "graph remove canto/validator-rewards --node http://localhost:8020",
+    "deploy-local": "graph create canto/validator-rewards --node http://localhost:8020 && graph deploy canto/validator-rewards --debug --ipfs http://localhost:5001 --node http://localhost:8020/",
+    "watch-local": "graph deploy canto/validator-rewards --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001",
+    "deploy": "graph deploy canto/validator-rewards --debug --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "prettier": "./node_modules/.bin/prettier —-write '**/*.ts'"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "0.42.4",
+    "@graphprotocol/graph-ts": "0.29.3",
+    "husky": "^8.0.3",
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json,css,md}": [
+      "prettier --write --config ./.prettierrc",
+      "git add"
+    ]
+  }
+}
